@@ -27,41 +27,47 @@ public class Email {
         // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
 
         if(oldPassword.equals(password)){
-            if(isvalid(newPassword)){
+            if(isValid(newPassword)){
                 System.out.println("Password changed successfully!");
                 this.password = newPassword;
-            }else{
+            }
+            else{
                 System.out.println("The new Password is not valid!");
             }
-        }else{
+        }
+        else{
             System.out.println("The given password does not match current password!");
         }
-
     }
 
-    private boolean isvalid(String newPassword){
-        boolean upp = false;
-        boolean low = false;
-        boolean digit = false;
-        boolean special = false;
+    private Boolean isValid(String password){
+        Boolean capitalLetter = false;
+        Boolean smallLetter = false;
+        Boolean digit = false;
+        Boolean specialCharacter = false;
 
-        if(newPassword.length() < 8) return false;
-        for(int i=0; i<newPassword.length(); i++){
-            char var = newPassword.charAt(i);
-            if (var >= 'A' && var <='Z'){
-                upp = true;
-            }else if(var >= 'a' && var <= 'z'){
-                low = true;
-            }else if(var >= 0 && var <= 9){
-                digit = true;
-            }else {
-                special = true;
-            }
+        // checking length of password
+        if(password.length() < 8){
+            return false;
         }
-        if (upp && low && digit && special){
+
+        for(int i=0;i<password.length(); i++){
+            char ch = password.charAt(i);
+            if(ch >= 'A' && ch <= 'Z'){
+                capitalLetter = true;
+            }
+            else if(ch >= 'a' && ch <= 'z' ){
+                smallLetter = true;
+            }
+            else if(ch >= '0' && ch <= '9'){
+                digit = true;
+            }
+            else specialCharacter = true;
+        }
+
+        if(capitalLetter && smallLetter && digit && specialCharacter){
             return true;
         }
         return false;
     }
-
 }
